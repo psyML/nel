@@ -2,7 +2,6 @@
 import math
 import msgpack
 import base64
-from itertools import izip
 
 from .data import ObjectStore
 
@@ -19,7 +18,7 @@ class EntityCounts(object):
         self.store = ObjectStore.Get('models:' + self.mid)
 
     def iter_counts(self, entities):
-        for entity, item in izip(entities, self.store.fetch_many(entities)):
+        for entity, item in zip(entities, self.store.fetch_many(entities)):
             yield entity, item.get('count', 0) if item else 0
 
     def count(self, entity):
@@ -49,10 +48,10 @@ class NameProbability(object):
             yield item['counts'] if item else {}
 
     def get_counts_for_names(self, names):
-        return dict(izip(names, self.iter_counts_for_names(names)))
+        return dict(zip(names, self.iter_counts_for_names(names)))
 
     def get_probs_for_names(self, names):
-        return dict(izip(names, self.iter_probs_for_names(names)))
+        return dict(zip(names, self.iter_probs_for_names(names)))
 
     def probability(self, name, entity, candidates):
         count = self.get_count(name, entity)
@@ -71,11 +70,11 @@ class EntityContext(object):
         self.idf_model = ObjectStore.Get('models:idfs[' + self.tag + ']')
 
     def get_entity_bows(self, entities):
-        return dict(izip(entities, (i['counts'] if i else {} for i in self.tfidf_model.fetch_many(entities))))
+        return dict(zip(entities, (i['counts'] if i else {} for i in self.tfidf_model.fetch_many(entities))))
 
     def get_document_bow(self, tfs):
         idfs = (m['idf'] if m else 0. for m in self.idf_model.fetch_many(tfs.iterkeys()))
-        return {t:math.sqrt(v)*idf for (t, v), idf in izip(tfs.iteritems(), idfs) if idf > 0}
+        return {t:math.sqrt(v)*idf for (t, v), idf in zip(tfs.iteritems(), idfs) if idf > 0}
 
     def get_entity_bow(self, entity):
         return self.tfidf_model.fetch(entity).get('counts', {})
@@ -86,7 +85,7 @@ class EntityEmbeddings(object):
         self.store = ObjectStore.Get('models:embeddings['+self.tag+']', deserializer=msgpack_deserialize)
 
     def get_embeddings(self, entities):
-        return dict(izip(entities, (i['embedding'] if i else None for i in self.store.fetch_many(entities))))
+        return dict(zip(entities, (i['embedding'] if i else None for i in self.store.fetch_many(entities))))
 
     def __contains__(self, entity):
         return self.store.exists(entity)
