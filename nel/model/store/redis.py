@@ -2,7 +2,7 @@ from __future__ import absolute_import
 import redis
 import re
 import ujson as json
-from itertools import islice, izip
+from itertools import islice
 
 from ..data import Store, ObjectStore, FieldStore, SetStore
 
@@ -111,7 +111,7 @@ class RedisFieldStore(RedisStore, FieldStore):
             keys = list(keys_iter)
             for key in keys:
                 p.hgetall(key)
-            for key, obj in izip(keys, p.execute()):
+            for key, obj in zip(keys, p.execute()):
                 obj['_id'] = self.to_oid(key)
                 yield obj
 
