@@ -31,7 +31,6 @@ setup(
         "MarkupSafe",
         "Werkzeug",
         "argparse",
-        "functools32",
         "itsdangerous",
         "msgpack-python",
         "numpy",
@@ -42,7 +41,6 @@ setup(
         "scikit-learn",
         "scipy",
         "six",
-        "wsgiref",
         "ujson",
         "progressbar2",
         "spacy"
