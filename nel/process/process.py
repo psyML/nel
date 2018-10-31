@@ -36,7 +36,7 @@ class CorpusMapper(object):
     def process_document(self, doc):
         try:
             doc = self.mapper(doc)
-        except Exception, e:
+        except Exception as e:
             log.warn('Error processing doc (%s): %s', doc.id, str(e))
             raise
 
