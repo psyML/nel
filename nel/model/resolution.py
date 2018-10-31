@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import cPickle as pickle
+import pickle
 from time import time
 from datetime import datetime
 
