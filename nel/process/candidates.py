@@ -1,6 +1,5 @@
 import re
 import string
-from itertools import izip
 
 from .process import Process
 from ..model import recognition
@@ -95,8 +94,8 @@ class NameCounts(CandidateGenerator):
         forms = list(set(df for c in doc.chains for m in c.mentions for df in self.get_normalised_forms(m.text)))
 
         state = {}
-        for sf, eps in self.nm.get_counts_for_names(forms).iteritems():
-            state[sf] = [e for e, c in sorted(eps.iteritems(), key=lambda (k,v):v, reverse=True)][:self.limit]
+        for sf, eps in self.nm.get_counts_for_names(forms).items():
+            state[sf] = [e for e, c in sorted(eps.iteritems(), key=lambda v:v[1], reverse=True)][:self.limit]
         return state
 
     def get_candidates(self, doc, chain, name, state):
