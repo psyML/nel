@@ -5,7 +5,6 @@ import pycrfsuite
 
 from time import time
 from datetime import datetime
-from itertools import izip
 from .data import ObjectStore
 
 from nel import logging
@@ -20,7 +19,7 @@ class NamePartCounts(object):
     def get_part_counts(self, terms):
         if isinstance(terms, (str, unicode)):
             terms = [terms]
-        return {t:d['counts'] if d else {} for t, d in izip(terms, self.store.fetch_many(terms))}
+        return {t:d['counts'] if d else {} for t, d in zip(terms, self.store.fetch_many(terms))}
 
 class SequenceClassifier(object):
     mid = 'models:seqtaggers'

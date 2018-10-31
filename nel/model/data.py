@@ -4,7 +4,7 @@ import re
 import ujson as json
 
 from collections import defaultdict
-from itertools import islice, izip
+from itertools import islice
 from pymongo import MongoClient
 
 from nel import logging
