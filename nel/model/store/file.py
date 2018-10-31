@@ -1,6 +1,6 @@
 import os
 import mmap
-import cPickle as pickle
+import pickle
 import operator
 from functools32 import lru_cache
 
