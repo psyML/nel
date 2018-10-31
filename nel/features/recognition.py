@@ -2,7 +2,9 @@ import re
 import string
 import math
 from itertools import chain
-from spacy.en import English
+import spacy
+spacy.load('en')
+from spacy.lang.en import English
 
 from ..model.recognition import NamePartCounts
 
