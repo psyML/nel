@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import cPickle as pickle
+import pickle
 
 from .feature import Feature
 from .mapping import FEATURE_MAPPERS
