@@ -2,7 +2,7 @@ import os
 import mmap
 import pickle
 import operator
-from functools32 import lru_cache
+from functools import lru_cache
 
 from ..data import Store, ObjectStore
 from nel import logging
