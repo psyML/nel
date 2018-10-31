@@ -1,5 +1,5 @@
 import six
-import Queue
+from multiprocessing import Queue
 import socket
 import multiprocessing
 
