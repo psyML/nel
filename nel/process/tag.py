@@ -4,7 +4,6 @@ import sys
 import re
 import string
 
-from itertools import izip
 from time import time
 from bisect import bisect_left
 from subprocess import Popen, PIPE
@@ -162,7 +161,7 @@ class StanfordTagger(Tagger):
 
             start = None
             last = 'O'
-            for i, (txt, tag) in enumerate(izip(tokens,tags)):
+            for i, (txt, tag) in enumerate(zip(tokens,tags)):
                 if tag != last:
                     if last != 'O':
                         yield self.mention_over_tokens(doc, start, i)
