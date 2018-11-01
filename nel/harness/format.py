@@ -1,5 +1,5 @@
 import json
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 from re import findall, match, DOTALL, sub, compile
 from collections import defaultdict
 from nel.doc import Doc
