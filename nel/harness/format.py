@@ -29,7 +29,7 @@ def normalize_special_characters(text):
         u'\U0001F676': '"',
         u'\U0001F677': '"',
     }
-    for c, r in entities.iteritems():
+    for c, r in entities.items():
         if c in text:
             text = text.replace(c, r)
     return text
@@ -41,7 +41,7 @@ def markdown_to_whitespace(markdown_txt):
     RE_MOVE_DASH = compile(r"(\s)([^\s]+)\\(-\w)")
 
     # remove table
-    match_table = findall(ur'(<table>.+?</table>)', markdown_txt, DOTALL)
+    match_table = findall('(<table>.+?</table>)', markdown_txt, DOTALL)
     for match_t in match_table:
         markdown_txt = markdown_txt.replace(match_t, u' ' * len(match_t))
         
@@ -55,25 +55,25 @@ def markdown_to_whitespace(markdown_txt):
                 line = u'  ' + line[2:]
 
             # remove headline formatting
-            match_head = match(ur'^(#+) (.+)$', line)
+            match_head = match('^(#+) (.+)$', line)
             if match_head:
                 sz = len(match_head.groups()[0])
                 if sz < 7:
                     line = (' ' * sz) + line[sz:]
 
             # remove emphasized formatting
-            emphs = findall(ur'((?<!\\)\*(.+?)(?<!\\)\*)', line)
+            emphs = findall('((?<!\\)\*(.+?)(?<!\\)\*)', line)
             for emph in emphs:
                 line = line.replace(emph[0], emph[0].replace('*', ' '))
 
             # remove important formatting
-            imps = findall(ur'((?<!\\)__(.+?)(?<!\\)__)', line)
+            imps = findall('((?<!\\)__(.+?)(?<!\\)__)', line)
             for imp in imps:
                 line = line.replace(imp[0], imp[0].replace('_', ' '))
 
             # remove link formatting
             links_txt = u''
-            links = findall(ur'((?<!\\)\[(.+?)(?<!\\)\](?<!\\)(\(\S+(?<!\\)\)))', line)
+            links = findall('((?<!\\)\[(.+?)(?<!\\)\](?<!\\)(\(\S+(?<!\\)\)))', line)
             for link in links:
                 line = line.replace(link[0], ' ' + link[1] + ' ' + (' ' * len(link[2])))
                 links_txt = links_txt + link[1]
